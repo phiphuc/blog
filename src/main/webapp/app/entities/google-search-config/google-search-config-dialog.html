@@ -1,0 +1,44 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myGoogleSearchConfigLabel" data-translate="blogApp.googleSearchConfig.home.createOrEditLabel">Create or edit a Google Search Config</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.googleSearchConfig.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.googleSearchConfig.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="blogApp.googleSearchConfig.googleKey" for="field_googleKey">Google Key</label>
+            <input type="text" class="form-control" name="googleKey" id="field_googleKey"
+                    ng-model="vm.googleSearchConfig.googleKey"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="blogApp.googleSearchConfig.googleCx" for="field_googleCx">Google Cx</label>
+            <input type="text" class="form-control" name="googleCx" id="field_googleCx"
+                    ng-model="vm.googleSearchConfig.googleCx"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="blogApp.googleSearchConfig.googleOpt" for="field_googleOpt">Google Opt</label>
+            <input type="text" class="form-control" name="googleOpt" id="field_googleOpt"
+                    ng-model="vm.googleSearchConfig.googleOpt"
+                    />
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

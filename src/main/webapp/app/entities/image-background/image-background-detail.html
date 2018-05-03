@@ -1,0 +1,32 @@
+
+<div>
+    <h2><span data-translate="blogApp.imageBackground.detail.title">Image Background</span> {{vm.imageBackground.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="blogApp.imageBackground.imgBlob">Img Blob</span></dt>
+        <dd>
+            <div ng-if="vm.imageBackground.imgBlob">
+                <a ng-click="vm.openFile(vm.imageBackground.imgBlobContentType, vm.imageBackground.imgBlob)">
+                    <img data-ng-src="{{'data:' + vm.imageBackground.imgBlobContentType + ';base64,' + vm.imageBackground.imgBlob}}" style="max-width: 100%;" alt="imageBackground image"/>
+                </a>
+                {{vm.imageBackground.imgBlobContentType}}, {{vm.byteSize(vm.imageBackground.imgBlob)}}
+            </div>
+        </dd>
+        <dt><span data-translate="blogApp.imageBackground.createdDate">Created Date</span></dt>
+        <dd>
+            <span>{{vm.imageBackground.createdDate | date:'mediumDate'}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="image-background-detail.edit({id:vm.imageBackground.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

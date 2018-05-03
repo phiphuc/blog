@@ -1,0 +1,4 @@
+entity ImageBackground {
+	imgBlob ImageBlob required,
+	createdDate LocalDate
+}

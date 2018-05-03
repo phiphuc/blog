@@ -1,0 +1,7 @@
+
+entity GoogleSearchConfig {
+	googleKey String,
+    googleCx String,
+    googleOpt String
+}
+

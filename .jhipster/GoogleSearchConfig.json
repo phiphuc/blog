@@ -1,0 +1,23 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "googleKey",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "googleCx",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "googleOpt",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20180427080533",
+    "entityTableName": "google_search_config",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no"
+}

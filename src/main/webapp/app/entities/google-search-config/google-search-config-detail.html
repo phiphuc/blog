@@ -1,0 +1,31 @@
+
+<div>
+    <h2><span data-translate="blogApp.googleSearchConfig.detail.title">Google Search Config</span> {{vm.googleSearchConfig.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="blogApp.googleSearchConfig.googleKey">Google Key</span></dt>
+        <dd>
+            <span>{{vm.googleSearchConfig.googleKey}}</span>
+        </dd>
+        <dt><span data-translate="blogApp.googleSearchConfig.googleCx">Google Cx</span></dt>
+        <dd>
+            <span>{{vm.googleSearchConfig.googleCx}}</span>
+        </dd>
+        <dt><span data-translate="blogApp.googleSearchConfig.googleOpt">Google Opt</span></dt>
+        <dd>
+            <span>{{vm.googleSearchConfig.googleOpt}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="google-search-config-detail.edit({id:vm.googleSearchConfig.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

@@ -1,0 +1,23 @@
+{
+    "blogApp": {
+        "googleSearchConfig" : {
+            "home": {
+                "title": "Google Search Configs",
+                "createLabel": "Create a new Google Search Config",
+                "createOrEditLabel": "Create or edit a Google Search Config"
+            },
+            "created": "A new Google Search Config is created with identifier {{ param }}",
+            "updated": "A Google Search Config is updated with identifier {{ param }}",
+            "deleted": "A Google Search Config is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Google Search Config {{ id }}?"
+            },
+            "detail": {
+                "title": "Google Search Config"
+            },
+            "googleKey": "Google Key",
+            "googleCx": "Google Cx",
+            "googleOpt": "Google Opt"
+        }
+    }
+}

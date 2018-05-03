@@ -1,0 +1,23 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "imgBlob",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "createdDate",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "changelogDate": "20180412023337",
+    "entityTableName": "image_background",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no"
+}
