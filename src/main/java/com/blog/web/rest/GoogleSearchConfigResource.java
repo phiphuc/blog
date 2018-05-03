@@ -19,11 +19,17 @@ import microsoft.exchange.webservices.data.credential.WebCredentials;
 import microsoft.exchange.webservices.data.misc.IAsyncResult;
 import microsoft.exchange.webservices.data.notification.*;
 import microsoft.exchange.webservices.data.property.complex.FolderId;
+import org.apache.commons.io.IOUtils;
+import org.json.JSONObject;
+import org.json.XML;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.Context;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -49,6 +55,16 @@ public class GoogleSearchConfigResource {
     public GoogleSearchConfigResource(GoogleSearchConfigRepository googleSearchConfigRepository) {
         this.googleSearchConfigRepository = googleSearchConfigRepository;
     }
+    @PostMapping("/mail")
+    @Timed
+    public void onNotificationReceived(@Context HttpServletRequest request, @Context HttpServletResponse response)
+        throws Exception {
+        log.debug("START SENT MAIL");
+        JSONObject xmlJSONObj = XML.toJSONObject(IOUtils.toString(request.getInputStream()));
+        String jsonPrettyPrintString = xmlJSONObj.toString(6);
+        log.debug(jsonPrettyPrintString);
+    }
+
     @PostMapping("/google-search-configs")
     @Timed
     public ResponseEntity<GoogleSearchConfig> createGoogleSearchConfig(@RequestBody GoogleSearchConfig googleSearchConfig){
@@ -117,46 +133,29 @@ public class GoogleSearchConfigResource {
     @GetMapping("/google-search-configs")
     @Timed
     public void getMail(){
-        /*try {
-            log.debug("START MAIL EXCHANGE");
-            // Subscribe to pull notifications in the Inbox folder, and get notified when a new mail is received, when an item or folder is created, or when an item or folder is deleted.
-
-            List folder = new ArrayList();
-            folder.add(new FolderId().getFolderIdFromWellKnownFolderName(WellKnownFolderName.Inbox));
-
-            PullSubscription subscription = service.subscribeToPullNotifications(folder, 1
-                , null, EventType.NewMail);
-            while (true){
-                log.debug("START GET EVENTS "+subscription.getId());
-                GetEventsResults events = subscription.getEvents();
-                for (ItemEvent itemEvent : events.getItemEvents()) {
-                    if (itemEvent.getEventType() == EventType.NewMail) {
-                        EmailMessage message = EmailMessage.bind(service, itemEvent.getItemId());
-                        break;
-                    }
-                }
-                Thread.sleep(10000);
-            }*/
-
-            /*WellKnownFolderName wkFolder = WellKnownFolderName.Inbox;
+        log.debug("START FOLLOW MAIL EXCHANGE");
+        try {
+            ExchangeService service = new ExchangeService(ExchangeVersion.Exchange2010_SP2);
+            service.setUrl(new URI("https://outlook.office365.com/EWS/Exchange.asmx"));
+            ExchangeCredentials credentials = new WebCredentials("15dh110100@st.huflit.edu.vn", "Josemourinho26011963", "outlook.office365.com");
+            service.setCredentials(credentials);
+            WellKnownFolderName wkFolder = WellKnownFolderName.Inbox;
             FolderId folderId = new FolderId(wkFolder);
             List<FolderId> folder = new ArrayList<FolderId>();
             folder.add(folderId);
 
-            URI callback = new URI("http://localhost:8087/rest/emailnotification/incomingevent");
-
+            URI callback = new URI("http://node11.codenvy.io:39367/rest/payment/incomingevent");
+            log.debug("START SUBSCRIPTION MAIL EXCHANGE");
             PushSubscription pushSubscription = service.subscribeToPushNotifications(
                 folder,
-                callback *//* The endpoint of the listener. *//*,
-                1*//* Get a status event every 5 minutes if no new events are available. *//*, "AQAAAIK3OXLFGJ9Hl6nOsjL6vNxJAwwyAAAAAAA="  *//* watermark: null to start a new subscription. *//*,
+                callback /* The endpoint of the listener. */,
+                1/* Get a status event every 5 minutes if no new events are available. */, null  /* watermark: null to start a new subscription. */,
                 EventType.NewMail);
-            System.out.println("PushSubscription = " + pushSubscription);*/
-            /*service.unsubscribe();*/
-            /*subscription.unsubscribe();*/
-/*        } catch (Exception e) {
-            log.debug("EXCEPTION MAIL EXCHANGE");
+            log.debug("SUBSCRIPTION MAIL EXCHANGE SUCCESS ID: " + pushSubscription.getId() + " WATERMARK :" + pushSubscription.getWaterMark());
+        } catch (Exception e) {
+            log.debug("SUBSCRIPTION MAIL EXCHANGE ERROR ");
             e.printStackTrace();
-        }*/
+        }
 
     }
 
